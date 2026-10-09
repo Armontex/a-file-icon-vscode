@@ -112,14 +112,16 @@ export class FileJsonGenerator extends AbstractJsonGenerator {
     const fileAssociations = this.atomConfig.filesAssociations;
     if (!fileAssociations) return [];
 
-    return Object.entries(fileAssociations).map(([key, value]) => ({
-      icon: {
-        fileExtensions: [key.toLowerCase().replace(WILDCARD_PATTERN, '')],
-        fileNames: [key.toLowerCase()],
+    return Object.entries(fileAssociations).map(([key, value]) => {
+      const pattern = key.toLowerCase();
+      const isExtension = WILDCARD_PATTERN.test(pattern);
+
+      return {
+        fileExtensions: isExtension ? [pattern.replace(WILDCARD_PATTERN, '')] : undefined,
+        fileNames: isExtension ? undefined : [pattern],
         name: value.toLowerCase(),
-      },
-      name: key.toLowerCase(),
-    }));
+      };
+    });
   }
 
   /**

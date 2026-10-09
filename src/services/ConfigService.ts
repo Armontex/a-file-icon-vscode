@@ -189,9 +189,15 @@ export class ConfigService implements AtomConfig {
     if (this.activeIconPacks !== config.atomConfig?.activeIconPacks) {
       changes.activeIconPacks = this.activeIconPacks;
     }
-    // if (this.filesAssociations !== config.atomConfig?.filesAssociations) {
-    //   changes.filesAssociations = this.filesAssociations;
-    // }
+    if (this.filesAssociations !== config.atomConfig?.filesAssociations) {
+      changes.filesAssociations = this.filesAssociations;
+    }
+    if (this.foldersAssociations !== config.atomConfig?.foldersAssociations) {
+      changes.foldersAssociations = this.foldersAssociations;
+    }
+    if (this.languagesAssociations !== config.atomConfig?.languagesAssociations) {
+      changes.languagesAssociations = this.languagesAssociations;
+    }
 
     return changes;
   }
